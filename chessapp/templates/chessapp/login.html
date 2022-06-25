@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="{% static 'chessapp/style.css' %}">
+</head>
+<body>
+  <form method="post">
+    {% csrf_token %}
+    <header>
+      <div class=topnav> </div>
+    </header>
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+    </div>
+
+    <div>
+        <label for="pass">Password:</label> 
+        <input type="password" id="pass" name="password">
+    </div>
+    <input type="submit" value="Sign in">
+  </form>
+</body>
