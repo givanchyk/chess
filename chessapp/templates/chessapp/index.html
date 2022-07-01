@@ -8,8 +8,15 @@
   <header>
     <div class=topnav> </div>
   </header>
-  <a href="/register"/> Register </a>
-  <a href="/login"/> Log in </a>
+  <div>
+    {% if user.is_authenticated %}
+      <p> Hi, {{user.username}} </p>
+      <a href="/logout"/> Log out </a>
+    {% else %}
+      <a href="/register"/> Register </a>
+      <a href="/login"/> Log in </a>
+    {% endif %}
+  </div>
   <form method="get">
     <input type="submit" class="btn" value="online"  name="online"> </input>
     <input type="submit" class="btn" value="computer"  name="computer"> </input>

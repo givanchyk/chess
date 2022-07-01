@@ -4,7 +4,8 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, logout
+from django.contrib.auth import login as auth_login
 from .models import Game
 from chess import STARTING_FEN
 
@@ -31,7 +32,7 @@ def game(request, game_id):
 def register(request):
     if request.method == 'POST':
         print(request.POST)
-        username, password, email = request.POST.get('username'), request.POST.get('email'), request.POST.get('password')
+        username, password, email = request.POST['username'], request.POST['email'], request.POST['password']
         if User.objects.filter(username=username).exists():
             print('NOT OK: USERNAME EXISTS')
         elif User.objects.filter(email=email).exists():
@@ -43,10 +44,14 @@ def register(request):
 def login(request):
     if request.method == 'POST':
         print(request.POST)
-        username, password = request.POST.get('username'),  request.POST.get('password')
+        username, password = request.POST['username'],  request.POST['password']
         user = authenticate(username=username, password=password)
         if user is not None:
-            print('OK')
+            auth_login(request, user)
+            return redirect('/')
         else:
-            print('NOT OK')
+            print('NOT OK BAD AUTH')
     return render(request, 'chessapp/login.html')
+def logout_view(request):
+    logout(request)
+    return redirect('/')
