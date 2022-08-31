@@ -41,7 +41,7 @@ def register(request):
             user = User.objects.create_user(username, email, password)
             print('OK OK user created')
     return render(request, 'chessapp/register.html')
-def login(request):
+def login_view(request):
     if request.method == 'POST':
         print(request.POST)
         username, password = request.POST['username'],  request.POST['password']
