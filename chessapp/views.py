@@ -7,7 +7,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as auth_login
 from .models import Game
-from chess import STARTING_FEN
+
+STARTING_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 
 def index(request): 
     print(request.GET)
